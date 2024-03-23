@@ -94,12 +94,14 @@ const register = async (req, res) =>{
     }
 }
 
-const getUser = (req, res) =>{
+const getAllUser = async (req, res) =>{
     try {
-        res.status(200).send("<h1>This is the Resumate Home page</h1>");
+        const users = await User.find();
+        
+        res.json(users);
     } catch (error) {
         res.status(404).json({msg:"Page not found"});
     }
 }
 
-module.exports = {home, register, login, getUser}; 
+module.exports = {home, register, login, getAllUser}; 

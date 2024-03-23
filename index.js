@@ -16,7 +16,7 @@ var corsOptions = {
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send("Hello This is new Home page of Resumate - The resume builder !!!")
+  res.send("Hello This is new Home Page of Resumate - The resume builder !!!")
 })
 
 app.use("/api/v1/auth", authRoute);
