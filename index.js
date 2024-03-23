@@ -5,7 +5,8 @@ const authRoute = require('./router/auth-router');
 const resumeRoute = require('./router/resume-router');
 const sectionRoute = require('./router/section-router');
 const contactRoute = require('./router/contact-router');
-const reviewRoute = require('./router/review-router')
+const reviewRoute = require('./router/review-router');
+const otpRoute = require('./router/otp-router');
 const dbConnect = require("./DBconnection/db");
 const cors = require('cors');
 
@@ -21,6 +22,7 @@ app.use("/api/v1/contact", contactRoute);
 app.use("/api v1/resume", resumeRoute);
 app.use("/api/v1/section", sectionRoute);
 app.use("/api/v1/review", reviewRoute);
+app.use("/api/v1/otp", otpRoute);
 
 dbConnect();
 
