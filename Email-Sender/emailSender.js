@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const sendMail = (email, otp) =>{
+const sendMail = (email, otp, name) =>{
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -13,63 +13,63 @@ const sendMail = (email, otp) =>{
         from: 'tilerahul8068@gmail.com',
         to: email,
         subject: 'OTP Verification',
-        text: `Your OTP (One-Time Password) for verification is: ${otp}`,
         html : `<!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>OTP Verification</title>
+            <title>Email Verification OTP</title>
             <style>
                 body {
                     font-family: Arial, sans-serif;
-                }
-                .container {
-                    max-width: 600px;
-                    margin: 0 auto;
-                    padding: 20px;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                }
-                .header {
+                    margin: 10px;
+                    padding: 0;
+                    background-color: #f4f4f4;
                     text-align: center;
-                    margin-bottom: 20px;
                 }
-                .otp-code {
+                .logo {
+                    max-width: 100px;
+                    margin-bottom: 20px;
+                    align-items: center;
+                }
+                .title {
                     font-size: 24px;
-                    font-weight: bold;
-                    text-align: center;
-                    color: #007bff;
                     margin-bottom: 20px;
                 }
-                .info {
-                    margin-bottom: 20px;
-                    text-align : center;
+                .message {
+                    font-size: 16px;
+                    margin-bottom: 30px;
+                }
+                .otp {
+                    font-size: 24px;
+                    color: #007bff;
+                    margin-bottom: 30px;
+                    font-weight: bold;
                 }
                 .footer {
-                    text-align: center;
-                    margin-top: 20px;
-                    font-size: 12px;
-                    color: #777;
+                    font-size: 14px;
+                    color: #666;
+                }
+                .warn{
+                    font-size: 14px;
+                    color: #fa0000;
+                }
+                .cName {
+                    font-size: 14px;
+                    color: #000000;
+                    font-weight: bold;
                 }
             </style>
         </head>
         <body>
-            <div class="container">
-                <div class="header">
-                    <h2>OTP Verification By Resumate</h2>
-                </div>
-                <div class="otp-code">
-                    Your OTP: <span id="otp">${otp}</span>
-                </div>
-                <div class="info">
-                    Please use the above OTP to verify your email address.
-                </div>
-                <div class="footer">
-                    <p>This email was sent automatically. Please do not reply.</p>
-                    <p>The above verification code expire in 5 minutes.</p>
-                </div>
-            </div>
+                <img class="logo" src="https://cdn-icons-png.flaticon.com/512/6614/6614677.png" alt="Company Logo">
+                <h2 class="title">Email Verification</h2>
+                <p class="message">Hello <span class="cName">${name}</span>,</p>
+                <p class="message">Thank you for registering with <span class="cName">Resumate</span>. To complete your registration, please enter the following OTP:</p>
+                <p class="otp">${otp}</p>
+                <p class="footer">If you didn't request this, you can safely ignore this email.</p>
+                <p class="warn">Note : This OTP will expire in 5 minutes.</p>
+                <p class="footer">Best Regards,<br><p class="cName">Resumate - The Resume Builder</p> </br>
         </body>
         </html>
         `

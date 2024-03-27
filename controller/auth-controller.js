@@ -80,14 +80,13 @@ const register = async (req, res) =>{
                 message : 'password does not match',
             })
         }
-        const hashPassword = await bcrypt.hash(password, 10);
-        const imgUrl = `https://ui-avatars.com/api/?name=${firstName}+${lastName}`
-        const userCreated = await User.create({firstName, lastName, email, phone, password:hashPassword, imgUrl});
+        // const hashPassword = await bcrypt.hash(password, 10);
+        // const imgUrl = `https://ui-avatars.com/api/?name=${firstName}+${lastName}`
+        // const userCreated = await User.create({firstName, lastName, email, phone, password:hashPassword, imgUrl});
 
         return res.status(200).json({
             success : true,
-            message : 'Registration Successful',
-            userId : userCreated._id.toString(),
+            message : 'All Fields are correct !!',
         })
     } catch (error) {
         res.status(404).json({message:"Page not found"});

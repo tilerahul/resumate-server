@@ -3,10 +3,10 @@ const OTP = require('../models/otpModel');
 
 const otpSender = async (req, res) => {
     try {
-        const { email } = req.body;
-        const otp = Math.floor(100000 + Math.random() * 900000);
+        const { email, name } = req.body;
+        const otp = Math.floor(10000 + Math.random() * 90000);
 
-        const isSend = sendMail(email, otp);
+        const isSend = sendMail(email, otp, name);
         if (isSend) {
             const otpCreate = await OTP.create({ email, otp });
 
