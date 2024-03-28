@@ -1,9 +1,10 @@
 const sendMail = require('../Email-Sender/emailSender');
 const OTP = require('../models/otpModel');
-
+const bcrypt = require('bcrypt');
+const User = require('../models/userModel');
 const otpSender = async (req, res) => {
     try {
-        const { email, name } = req.body;
+        const { email, name} = req.body;
         const otp = Math.floor(10000 + Math.random() * 90000);
 
         const isSend = sendMail(email, otp, name);
@@ -37,8 +38,8 @@ const otpSender = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error);
         res.status(401).json({
+            success : false,
             message: 'Error while sending email',
         })
     }
@@ -46,14 +47,21 @@ const otpSender = async (req, res) => {
 
 const otpVerify = async (req, res) => {
     try {
-        const { email, otp } = req.body;
+        const { email, otp, formData } = req.body;
+        const {firstName, lastName, phone, password} = formData;
 
         const sendOtp = await OTP.findOne({ email }).limit(1);
 
         if (otp === sendOtp.otp) {
+
+            const hashPassword = await bcrypt.hash(password, 10);
+            const imgUrl = `https://ui-avatars.com/api/?name=${firstName}+${lastName}`
+            const userCreated = await User.create({firstName, lastName, email, phone, password:hashPassword, imgUrl});
+
             return res.status(200).json({
                 success: true,
-                message: "OTP verification Done"
+                message: "Registration Successful !!",
+                userCreated
             })
         } else {
             return res.status(400).json({
