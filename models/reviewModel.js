@@ -6,11 +6,15 @@ const reviewSchema = new mongoose.Schema({
         require: true,
         ref: 'User',
     },
-    name : {
+    imgUrl : {
         type : String,
         require : true,
     },
-    rating: {
+    username : {
+        type : String,
+        require : true,
+    },
+    star: {
       type: Number,
       required: true
     },

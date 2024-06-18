@@ -3,17 +3,22 @@ const Review = require('../models/reviewModel');
 
 const review = async (req, res) => {
     try {
-        const { userId, name, rating, comment } = req.body;
+        const { userId, imgUrl, username, star, comment } = req.body;
+
+        if(!star){
+            return res.status(400).json({
+                success : false,
+                message : 'Please Give Ratings !!',
+            })
+        }
+
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
         const newReview = new Review({
-            userId,
-            name,
-            rating,
-            comment
+            userId, imgUrl, username, star, comment
         });
         const savedReview = await newReview.save();
 
