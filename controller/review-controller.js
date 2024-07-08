@@ -5,6 +5,8 @@ const review = async (req, res) => {
     try {
         const { userId, imgUrl, username, star, comment } = req.body;
 
+        console.log(req.body);
+
         if(!star){
             return res.status(400).json({
                 success : false,
